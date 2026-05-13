@@ -32,6 +32,22 @@ public class FluxAndMono {
 
     }
 
+    public Flux<String> carsFluxFilterMap(int num){
+
+        return Flux.fromIterable(List.of("Truck","Bus","Van","Taxi"))
+                .filter(s->s.length()>num)
+                .map(String::toUpperCase);
+
+    }
+
+    public Flux<String> carsFluxFlatMap(){
+
+        return Flux.fromIterable(List.of("Truck","Bus","Van","Taxi"))
+                .flatMap(s->Flux.just(s.split("")))
+                .log();
+
+    }
+
     public static void main(String[] args) {
 
         FluxAndMono fluxAndMono = new FluxAndMono();
